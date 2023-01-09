@@ -1,9 +1,8 @@
-# Data-Analysis-Covid---19
-## Data Analysis of Covid - 19 Worldwide using SQL
+# ***Data Analysis of Covid - 19 Worldwide using SQL***
 
-### 1. Total Covid-19 Cases vs Infected Cases.
+## _1. Total Covid-19 Cases vs Infected Cases._
 
-### Continent - Total Covid-19 Cases vs Infected Cases Ordered By Continent.
+### _Continent - Total Covid-19 Cases vs Infected Cases Ordered By Continent._
 ``` sql server
 SELECT continent, 
 SUM(total_cases) AS total_cases, 
@@ -15,7 +14,7 @@ WHERE continent IS NOT null
 GROUP BY continent
 ORDER BY continent
 ```
-### Countries - Total Covid-19 Cases vs Infected Cases Ordered By location.
+### _Countries - Total Covid-19 Cases vs Infected Cases Ordered By location._
 ``` sql server
 SELECT distinct(location), 
 MAX(total_cases) AS total_cases, 
@@ -28,9 +27,9 @@ GROUP BY location
 ORDER BY location
 ```
 ##
-### 2. Total Cases vs Total Deaths.
+## _2. Total Cases vs Total Deaths._
 
-### Continent - Total Cases vs Total Deaths.
+### _Continent - Total Cases vs Total Deaths._
 ``` sql server
 SELECT distinct(continent), 
 SUM(total_cases) AS total_cases,
@@ -41,7 +40,7 @@ WHERE continent IS NOT null
 GROUP BY continent
 ORDER BY continent
 ```
-### Countries - Total Cases vs Total Deaths.
+### _Countries - Total Cases vs Total Deaths._
 ``` sql server
 SELECT distinct(location), 
 MAX(total_cases) AS total_cases, 
@@ -53,9 +52,9 @@ GROUP BY location
 ORDER BY location
 ```
 ##
-### 3. Survival rate if contracted Covid-19.
+## 3. _Survival rate if contracted Covid-19._
 
-### Continent - Survival rate if contracted Covid-19.
+### _Continent - Survival rate if contracted Covid-19._
 ``` sql server
 SELECT continent, SUM(total_cases) AS total_cases, 
 SUM(CAST(total_deaths AS FLOAT)) AS total_deaths, 
@@ -66,7 +65,7 @@ WHERE continent IS NOT null
 GROUP BY continent
 ORDER BY continent
 ```
-### Countries - Survival rate if contracted Covid-19.
+### _Countries - Survival rate if contracted Covid-19._
 ``` sql server
 SELECT location, 
 MAX(total_cases) AS total_cases, 
@@ -79,7 +78,7 @@ GROUP BY location
 ORDER BY location
 ```
 ##
-### UAE - Survival rate if contracted Covid-19.
+### _UAE - Survival rate if contracted Covid-19._
 ``` sql server
 SELECT location, 
 MAX(total_cases) AS total_cases, 
@@ -92,9 +91,9 @@ GROUP BY location
 ORDER BY location
 ```
 ##
-### 4. Total Cases vs Populations
+## _4. Total Cases vs Populations_
 
-### Continent - Total Cases vs Populations
+### _Continent - Total Cases vs Populations_
 ``` sql server
 SELECT distinct(continent), 
 SUM(total_cases) AS total_cases, 
@@ -105,7 +104,7 @@ WHERE continent IS NOT null
 GROUP BY continent
 ORDER BY continent
 ```
-### Countries - Total Cases vs Populations
+### _Countries - Total Cases vs Populations_
 ``` sql server
 SELECT distinct(location), 
 MAX(total_cases) AS total_cases, 
@@ -117,9 +116,9 @@ GROUP BY location
 ORDER BY location
 ```
 ##
-### 5.  Highest infection rate in comparison to Populations.
+## _5.  Highest infection rate in comparison to Populations._
 
-### Countries - Highest infection rate in comparison to Populations
+### _Countries - Highest infection rate in comparison to Populations_
 ``` sql server
 SELECT location, 
 MAX(total_cases) AS infectiON_count, 
@@ -130,9 +129,9 @@ GROUP BY location, population
 ORDER BY infected_percentage desc
 ```
 ##
-### 6. Highest Death count in comparison to Populations.
+## 6. _Highest Death count in comparison to Populations._
 
-### Continents - With Highest Death count in comparison to Populations
+### _Continents - With Highest Death count in comparison to Populations_
 ``` sql server
 SELECT continent,
 SUM(CAST(total_deaths AS bigint)) AS total_death_count
@@ -141,7 +140,7 @@ WHERE continent IS NOT null
 GROUP BY continent
 ORDER BY total_death_count desc
 ```
-### Countries - With Highest Death count in comparison to Populations
+### _Countries - With Highest Death count in comparison to Populations_
 ``` sql server
 SELECT location, 
 MAX(CAST(total_deaths AS bigint)) AS total_death_count
@@ -151,9 +150,9 @@ GROUP BY location
 ORDER BY total_death_count desc
 ```
 ##
-### 7. Global Comparison - New Covid-19 cases vs total death count with death percentage ordered by date
+## _7. Global Comparison - New Covid-19 cases vs total death count with death percentage ordered by date_
 
-### Grouped by Date
+### _Grouped by Date_
 ``` sql server
 SELECT date, SUM(new_cases) AS total_new_count, 
 SUM(CAST(new_deaths AS int)) AS total_death_count,
@@ -164,7 +163,7 @@ GROUP BY date
 ORDER BY date
 ```
 ##
-### 8. Global Comparison - Total New Cases Count, Death Count, Death Percentage
+## _8. Global Comparison - Total New Cases Count, Death Count, Death Percentage_
 ``` sql server
 SELECT SUM(new_cases) AS total_new_count, 
 SUM(CAST(new_deaths AS int)) AS total_death_count,
@@ -173,9 +172,9 @@ FROM CovidDeaths
 WHERE continent IS NOT null
 ```
 ##
-### 9. Global Comparison - Total Populations vs Total Vacinations
+## _9. Global Comparison - Total Populations vs Total Vacinations_
 
-### Continent -  Total Populations vs Total Vacinations
+### _Continent -  Total Populations vs Total Vacinations_
 ``` sql server
 SELECT CD.continent, 
 SUM(CD.population) AS populations, 
@@ -188,7 +187,7 @@ WHERE CD.continent IS NOT null
 GROUP BY CD.continent
 ORDER BY CD.continent
 ```
-### Countries -  Total Populations vs Total Vacinations
+### _Countries -  Total Populations vs Total Vacinations_
 ``` sql server
 SELECT CD.location, 
 MAX(CD.population) AS population, 
@@ -202,7 +201,7 @@ GROUP BY CD.location
 ORDER BY CD.location
 ```
 ##
-### 10. Continents location sum of New Vacinations per Date.
+## _10. Continents location sum of New Vacinations per Date._
 ``` sql server
 SELECT CD.continent, 
 CD.location, 
@@ -218,8 +217,8 @@ WHERE CD.continent IS NOT null and CV.new_vaccinatiONs IS NOT null
 ORDER BY CD.continent,CD.location
 ```
 ##
-### Continent's location sum of New Vacinations per Date and Percentage
-### Using CTE
+### _Continent's location sum of New Vacinations per Date and Percentage_
+### _Using CTE_
 ``` sql server
 With CTE (continent, location, date, population, new_vaccinatiONs,People_Vacinated,People_Vacinated_Percentage)
 AS 
@@ -238,7 +237,7 @@ GROUP BY location
 ORDER BY Percentage_Vacinated desc
 ```
 ##
-### 11. Countries that started Vacinations earliest.
+## _11. Countries that started Vacinations earliest._
 ``` sql server
 SELECT distinct(location), min(date) AS earliested_date
 FROM CovidVacinatiONs
@@ -247,7 +246,7 @@ GROUP BY location
 ORDER BY earliested_date
 ```
 ##
-### 12. Countries that started Vacinations late.
+## _12. Countries that started Vacinations late._
 ``` sql server
 SELECT distinct(location), min(date) AS earliested_date
 FROM CovidVacinatiONs
